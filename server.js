@@ -21,7 +21,10 @@ var checkRateLimit = require('./lib/rate-limit')(process.env.CORSANYWHERE_RATELI
 
 var cors_proxy = require('./lib/cors-anywhere');
 cors_proxy.createServer({
-  getProxyForUrl:"https://reddit.com",
+  getProxyForUrl:function(path,a,b,c){
+    console.log('@@@@@',path,a,b,c,'@@@@@')
+    return "https://reddit.com"+path
+  },
   originBlacklist: originBlacklist,
   originWhitelist: originWhitelist,
   //requireHeader: ['origin', 'x-requested-with'],
